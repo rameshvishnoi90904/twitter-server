@@ -3,8 +3,8 @@ var passport = require("passport");
 var request = require("request"),cors = require('cors');
 var Strategy = require("passport-twitter").Strategy;
 var OAuth = require("oauth").OAuth;
-const CONSUMER_KEY = "";
-const CONSUMER_SECRET = "";
+const CONSUMER_KEY = "dNLSy2jAlv1RB0QIdOkH6EEkw";
+const CONSUMER_SECRET = "1qcxD8esIxXsivrMf59KPkUvtQUibPMy3jrg9AwTE6IJmfogef";
 var router = express.Router();
 var oauth = new OAuth(
 	"https://api.twitter.com/oauth/request_token",
@@ -53,7 +53,8 @@ app.get("/", function(req, res) {
 
 
 app.get("/getTweetList/",function(req, res) {
-	var url = "https://api.twitter.com/1.1/statuses/user_timeline.json";
+	console.log(req.query.fromId);
+	var url = "https://api.twitter.com/1.1/statuses/home_timeline.json?count=5";
 	oauth.get(url, req.headers["clienttoken"], req.headers["clientsecrettoken"], function(err, body, response) {
 		if (!err && response.statusCode == 200) {
 			// success(body);
